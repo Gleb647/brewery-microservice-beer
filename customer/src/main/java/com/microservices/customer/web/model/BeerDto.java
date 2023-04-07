@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
 @Data
@@ -23,9 +24,9 @@ public class BeerDto {
     @Null
     private Long version;
     @Null
-    private Timestamp createDate;
+    private OffsetDateTime createDate;
     @Null
-    private Timestamp lastModifiedDate;
+    private OffsetDateTime lastModifiedDate;
 
     @NotBlank
     private String beerName;
