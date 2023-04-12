@@ -4,29 +4,35 @@ import com.microservices.customer.domain.Beer;
 import com.microservices.customer.repositories.BeerRepository;
 import com.microservices.customer.web.controller.NotFoundException;
 import com.microservices.customer.web.mappers.BeerMapper;
+import com.microservices.customer.web.mappers.BeerMapperImpl;
 import com.microservices.customer.web.model.BeerDto;
 import com.microservices.customer.web.model.BeerStyleEnum;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.processing.Generated;
 import java.util.UUID;
 
 @Slf4j
 @RequiredArgsConstructor
 @Service
+@Generated(
+        value = "org.mapstruct.ap.MappingProcessor"
+)
 public class BeerServiceImpl implements BeerService{
     private final BeerRepository beerRepository;
-    private final BeerMapper beerMaper;
+    private final BeerMapperImpl beerMapper;
 
     @Override
     public BeerDto getBeerById(UUID id) {
-        return beerMaper.beerToBeerDto(beerRepository.findById(id).orElseThrow(NotFoundException::new));
+        return beerMapper.beerToBeerDto(beerRepository.findById(id).orElseThrow(NotFoundException::new));
     }
 
     @Override
     public BeerDto saveNewBeer(BeerDto beerDto) {
-        return beerMaper.beerToBeerDto(beerRepository.save(beerMaper.beerDtoToBeer(beerDto)));
+        return beerMapper.beerToBeerDto(beerRepository.save(beerMapper.beerDtoToBeer(beerDto)));
     }
 
     @Override
@@ -36,7 +42,7 @@ public class BeerServiceImpl implements BeerService{
         beer.setBeerStyle(beerDto.getBeerStyle().name());
         beer.setPrice(beerDto.getPrice());
         beer.setUpc(beerDto.getUpc());
-        return beerMaper.beerToBeerDto(beerRepository.save(beer));
+        return beerMapper.beerToBeerDto(beerRepository.save(beer));
     }
 
     @Override

@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +21,8 @@ import java.util.UUID;
 public class BeerController {
 
     private final BeerService beerService;
+    private final KafkaTemplate<String, BeerDto> kafkaTemplate;
+
 
     @GetMapping("/{beerId}")
     public ResponseEntity<BeerDto> getBeerById(@PathVariable("beerId") UUID beerId){
@@ -34,5 +37,10 @@ public class BeerController {
     @PutMapping("/{beerId}")
     public ResponseEntity<BeerDto> updateBeerById(@PathVariable("beerId") UUID beerId, @Valid @RequestBody BeerDto beerDto){
         return new ResponseEntity<>(beerService.updateBeer(beerId, beerDto), HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping("order-beer")
+    public void orderBeer(@Valid @RequestBody BeerDto beerDto){
+        kafkaTemplate.send("Order", beerDto);
     }
 }
