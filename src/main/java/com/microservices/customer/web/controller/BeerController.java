@@ -18,16 +18,12 @@ import java.util.UUID;
 
 
 @Validated
-
-@RequestMapping("/get/api/beer")
+@RequestMapping("/storage")
 @RestController
 public class BeerController {
 
     @Autowired
     private final BeerService beerService;
-
-//    @Autowired
-//    private final KafkaTemplate<String, BeerOrder> kafkaTemplate;
 
     public BeerController(BeerService beerService) {
         this.beerService = beerService;
@@ -37,11 +33,6 @@ public class BeerController {
     @GetMapping("/{beerId}")
     public ResponseEntity<BeerDto> getBeerById(@PathVariable("beerId") Long beerId){
         return new ResponseEntity<>(beerService.getBeerById(beerId), HttpStatus.OK);
-    }
-
-    @PostMapping
-    public ResponseEntity<BeerDto> saveNewBeer(@Valid @RequestBody BeerDto beerDto){
-        return new ResponseEntity<>(beerService.saveNewBeer(beerDto), HttpStatus.CREATED);
     }
 
     @PutMapping("/{beerId}")
@@ -59,6 +50,5 @@ public class BeerController {
                 .name(name)
                 .quantity(quantity)
                 .build();
-        //kafkaTemplate.send("Orders", order);
     }
 }

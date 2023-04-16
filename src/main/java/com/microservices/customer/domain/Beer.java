@@ -17,6 +17,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @Builder
 @Entity
+@Table
 public class Beer {
     @Id
     @SequenceGenerator(name = "beer_sequence", sequenceName = "beer_sequence", allocationSize = 1)
@@ -24,14 +25,6 @@ public class Beer {
     @Column(name = "id", updatable = false)
     @JsonIgnore
     private Long id;
-
-    @Version
-    private Long version;
-    @CreationTimestamp
-    @Column(updatable = false)
-    private Timestamp createDate;
-    @UpdateTimestamp
-    private Timestamp lastModifiedDate;
 
     private String beerName;
     private String beerStyle;
@@ -44,3 +37,5 @@ public class Beer {
 
     private Integer quantityOnHand;
 }
+
+

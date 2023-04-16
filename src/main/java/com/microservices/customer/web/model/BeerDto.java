@@ -21,14 +21,6 @@ public class BeerDto {
     @Null
     @JsonIgnore
     private Long id;
-    @Null
-    @JsonIgnore
-    private Long version;
-    @Null
-    private OffsetDateTime createDate;
-    @Null
-    @JsonIgnore
-    private OffsetDateTime lastModifiedDate;
 
     @NotBlank
     private String beerName;

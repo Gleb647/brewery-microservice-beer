@@ -47,7 +47,15 @@ public class CustomerApplication {
 						.beerStyle("PALE_ALE")
 						.quantityOnHand(100)
 						.upc(3701000003L)
-						.price(new BigDecimal("11.95"))
+						.price(new BigDecimal("10.95"))
+						.build());
+
+				beerRepository.save(Beer.builder()
+						.beerName("Miller Lite")
+						.beerStyle("PALE_ALE")
+						.quantityOnHand(4)
+						.upc(3701000004L)
+						.price(new BigDecimal("8.95"))
 						.build());
 			};
 		}
