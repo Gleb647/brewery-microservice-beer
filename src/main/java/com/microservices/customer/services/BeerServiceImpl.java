@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.processing.Generated;
+import java.util.List;
 import java.util.UUID;
 
 @Slf4j
@@ -53,5 +54,10 @@ public class BeerServiceImpl implements BeerService{
     @Override
     public Beer findByName(String beerName){
         return beerRepository.findByBeerName(beerName);
+    }
+
+    @Override
+    public List<Beer> getAllBeer() {
+        return beerRepository.findAll();
     }
 }

@@ -3,6 +3,7 @@ package com.microservices.customer.services;
 import com.microservices.customer.domain.Beer;
 import com.microservices.customer.web.model.BeerDto;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface BeerService {
@@ -11,4 +12,5 @@ public interface BeerService {
     BeerDto updateBeer(Long id, BeerDto beerDto);
     void deleteBeer(Long id);
     Beer findByName(String beerName);
+    List<Beer> getAllBeer();
 }

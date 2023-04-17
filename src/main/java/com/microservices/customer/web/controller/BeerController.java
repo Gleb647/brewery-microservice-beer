@@ -29,7 +29,6 @@ public class BeerController {
         this.beerService = beerService;
     }
 
-
     @GetMapping("/{beerId}")
     public ResponseEntity<BeerDto> getBeerById(@PathVariable("beerId") Long beerId){
         return new ResponseEntity<>(beerService.getBeerById(beerId), HttpStatus.OK);
@@ -40,15 +39,8 @@ public class BeerController {
         return new ResponseEntity<>(beerService.updateBeer(beerId, beerDto), HttpStatus.NO_CONTENT);
     }
 
-    @PostMapping("/order-beer")
-    public void orderBeer(
-            @RequestParam("id") Long id,
-            @RequestParam("quantity") Integer quantity,
-            @RequestParam("name") String name){
-        BeerOrder order = BeerOrder.builder()
-                .beerDto(beerService.getBeerById(id))
-                .name(name)
-                .quantity(quantity)
-                .build();
+    @GetMapping()
+    public ResponseEntity<List<Beer>> getAllBeer(){
+        return new ResponseEntity<>(beerService.getAllBeer(), HttpStatus.OK);
     }
 }
